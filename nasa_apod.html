@@ -1,0 +1,47 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    
+  </head>
+  
+<body>
+
+  <script>
+    let end = "https://api.nasa.gov/planetary/apod?api_key=RGI34PcAbz5nvRFrjYosrAB3JuIXtWYgYqO9iP8g";
+    fetch(end)
+    .then(resp =>{ return resp.json()})
+    .then(json => {
+
+      var elements = {};
+
+      let header = document.createElement("h1");
+      header.innerText = json["title"]
+      document.body.appendChild(header);
+
+      let paraGraph1 = document.createElement("p1")
+      paraGraph1.innerText= json["date"];
+      document.body.appendChild(paraGraph1 );
+      document.body.appendChild(document.createElement("br"));
+
+      let paraGraph2 = document.createElement("p1");
+      paraGraph2.innerText = json["explanation"];
+      document.body.appendChild(paraGraph2);
+      document.body.appendChild(document.createElement("br"));
+
+
+      let img = document.createElement("img");
+      img.src = json["hdurl"];
+      img.width = "800";
+      document.body.appendChild(img);
+
+    })
+      
+     
+    
+  </script>
+     
+</body>
+
+</html>

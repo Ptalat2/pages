@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+    <style> 
+      a:link, a:visited {
+  background-color: #f44336;
+  color: white;
+  padding: 14px 25px;
+  text-align: right;
+  text-decoration: none;
+  display: inline-block;
+}
+    </style>
+<a href="index.html" >HOME </a>
+  <head>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+      google.charts.load('current', {'packages':['corechart']});
+      google.charts.setOnLoadCallback(drawChart);
+       google.charts.setOnLoadCallback(drawChart1);
+
+      function drawChart() {
+            let endpoint="https://data.cityofchicago.org/resource/dw27-rash.json?$SELECT=school_type,count(school_type)&$GROUP=school_type";
+        fetch(endpoint).then ( (response) => {
+              return response.json()
+            })
+            .then ( (json) => {
+              console.log(json)
+
+          var data = new google.visualization.DataTable();
+
+          data.addColumn("string", "school_type");
+          data.addColumn("number","count_school_type");
+          json.forEach(myFunction);
+        function myFunction(record) {
+            data.addRow([record["school_type"],parseInt(record["count_school_type"])]);
+          
+        }
+         var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+              var options = {
+                title: 'My Daily Activities'
+                
+              }
+
+         chart.draw(data, options);
+      } )
+      }
+
+      function drawChart1() {
+         let endpoint="https://data.cityofchicago.org/resource/553k-3xzc.json?$SELECT=date,sum(total_doses_cumulative)&$GROUP=date&$ORDER=date";
+        fetch(endpoint).then ( (response) => {
+              return response.json()
+            })
+            .then ( (json) => {
+              console.log(json)
+              
+            })
+
+
+      }
+      
+    </script>
+  </head>
+  <body>
+    <div id="piechart" style="width: 900px; height: 500px;"></div>
+    <div id="curve_chart" style="width: 900px; height: 500px"></div>
+    
+    
+  </body>
+</html>

@@ -1,15 +1,68 @@
 <!DOCTYPE html>
-<link href="app-shell-basics.html">
 <html>
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width">
+<link rel="manifest" href="/manifest.webmanifest">
+    <script>
+  if('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('sw.js');
+  };
+</script>
+
     <title>replit</title>
-     
+
   </head>
   <body>
+    <h1>IT202 - Spring 2022 - Pages</h1>
+ 
+    <div id="pageLinks"></div>
+   
+
+    <script>
+      
+
+
+      let assignments = [
+        "googleMapsAndStaticData.html",
+        "googleMapsAndLiveData.html",
+        "google_charts_basics.html",
+        "canvas.html",
+        "animation.html",
+        "events.html",
+        "images.html",
+        "material-quickstart.html",
+        "nasa_apod.html",
+        "app-shell-basics.html",
+        "map_basic.html",
+        "employee-search.html",
+        "basic-fetch-with-bootstrap-cards.html",
+        "bootstrap_rwd_basics.html",
+        "css_basics.html",
+        "dexie.html",
+        "switch.html",
+        "GeoLocation.html",
+        "locationAwareMap.html",
+        "textToSpeech.html"
+      ]
+
+      let linksDiv = document.querySelector("#pageLinks");
+
+      assignments.forEach ( (item) => {
+        let a = document.createElement("a");
+        a.href=item;
+        a.innerText = item;
+        
+        linksDiv.append(a);
+        linksDiv.append(document.createElement("hr"));
+
+      });
+
+
     
-    <h1> <a href = "app-shell-basics.html">Pages home</a></h1>
-    
+      
+
+
+    </script>
   </body>
 </html>

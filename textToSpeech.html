@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <style>
+    </style>
+   
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+<link rel="manifest" href="/manifest.webmanifest">
+    <script>
+  if('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('sw.js');
+  };
+</script>
+
+    <title>replit</title>
+
+  </head>
+  <body>
+    <label class="mdc-text-field mdc-text-field--outlined mdc-text-field--textarea mdc-text-field--no-label">
+  <span class="mdc-notched-outline">
+    <span class="mdc-notched-outline__leading"></span>
+    <span class="mdc-notched-outline__trailing"></span>
+  </span>
+  <span class="mdc-text-field__resizer">
+    <textarea class="mdc-text-field__input" rows="8" cols="40" aria-label="Label"></textarea>
+  </span>
+</label>
+
+    <button>Start Listening</button>
+
+    <script>
+
+
+    // Speech Recognition
+
+    
+    let recognition = new window.webkitSpeechRecognition()
+    
+    recognition.addEventListener('result', (e) => {
+      console.log(e)
+     let c = document.querySelector(".mdc-text-field__input");
+      // let p = document.createElement("p");
+      // p.innerText = e.results[0][0].transcript;
+      // console.log(p);
+      c.value = e.results[0][0].transcript;
+    });
+
+    document.querySelector("button").addEventListener("click", (e) => {
+
+      if (e.srcElement.innerText == "Start Listening") {
+        recognition.start();
+        e.srcElement.innerText = "Stop Listening";
+      } else {
+
+        recognition.stop();
+        e.srcElement.innerText = "Start Listening";        
+      }
+      
+    });
+  let synth = window.speechSynthesis;
+      
+      // speak any paragraph content
+      // document.querySelector("body")
+          document.querySelector(".mdc-text-field__input")
+        .addEventListener("click", (e) => {
+          console.log(e);
+          
+          
+          // if the clicked element is a paragraph
+          // let c = document.querySelector(".mdc-text-field__input");
+         
+
+            let utterance = new SpeechSynthesisUtterance(e.srcElement.value);
+          console.log(e.value);
+            utterance.voice = synth.getVoices()[0];
+            speechSynthesis.speak(utterance);
+          
+        
+        
+        });
+    </script>
+  </body>
+</html>

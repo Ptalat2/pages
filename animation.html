@@ -1,0 +1,169 @@
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <style> 
+      a:link, a:visited {
+  background-color: #f44336;
+  color: white;
+  padding: 14px 25px;
+  text-align: right;
+  text-decoration: none;
+  display: inline-block;
+}
+    </style>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>replit</title>
+    <a href="index.html" >HOME </a>
+    <style>
+      #canvas1 {background-color: silver;}
+
+      
+    </style>
+  </head>
+  <body>
+    <canvas width=400 height=400 id="canvas1"  ></canvas>
+    
+    <script>
+
+      // get a reference to the element and the drawing context
+
+      let c = document.querySelector("#canvas1");
+      let ctx = c.getContext("2d");
+// function myFunction() {
+//   document.querySelector("#canvas1").style.background = "red";
+// }
+   const handler = (e) => {  
+
+          if (e.key == "ArrowUp") {
+            y -= 5;
+            x-=5
+          } else if (e.key == "ArrowDown") {
+            y += 5;  
+            x+=5;
+          }
+     if(e.key == " ") {
+       document.querySelector("#canvas1").style.background = "red"
+        
+     }
+
+     if(e.key == "B") {
+        document.querySelector("#canvas1").style.background = "green"
+     }
+     
+      
+   }
+      window.addEventListener("keydown", handler);
+      window
+
+      let y = 50;
+      let x = 50;
+
+    var circles = [{
+  x: 50,
+  y: 100,
+  r: 10,
+  vx: 10,
+  vy: 9,
+  color: 125
+}, {
+  x: 150,
+  y: 80,
+  r: 20,
+  vx: 15,
+  vy: 8,
+  color: 205
+}, {
+  x: 90,
+  y: 150,
+  r: 5,
+  vx: 5,
+  vy: 15,
+  color: 25
+}, {
+  x: 100,
+  y: 50,
+  r: 15,
+  vx: 8,
+  vy: 10,
+  color: 100
+}];
+
+      var container = {
+  x: 0,
+  y: 0,
+  width: 600,
+  height: 300
+};
+      function draw () {
+
+        // clear drawing
+        ctx.clearRect(0,0, c.width, c.height)
+
+        //  update values/variables        
+        y += 1;
+        x+=2
+
+        //  handle conditions
+        if (y > c.height) {
+          y = c.height-5;
+        }
+
+        if(x > c.height) {
+          x=c.height-5;
+        }
+
+        // render
+        ctx.beginPath();
+        ctx.arc(100, y, 20, 0, 2 * Math.PI);
+        ctx.closePath();
+        ctx.fillStyle = "black";
+        ctx.fill()
+
+         for (var i = 0; i < circles.length; i++) {
+    //draw the circles
+           
+    ctx.fillStyle = 'hsl(' + circles[i].color++ + ', 100%, 50%)';
+    ctx.beginPath();
+    ctx.arc(circles[i].x, circles[i].y, circles[i].r, 0, Math.PI * 2, true);
+    ctx.fill()
+         
+
+          if (circles[i].x - circles[i].r + circles[i].vx < container.x || circles[i].x + circles[i].r + circles[i].vx > container.x + container.width) {
+      circles[i].vx = -circles[i].vx;
+    }
+
+    if (circles[i].y + circles[i].r + circles[i].vy > container.y + container.height || circles[i].y - circles[i].r + circles[i].vy < container.y) {
+      circles[i].vy = -circles[i].vy;
+    }
+
+    circles[i].x += circles[i].vx
+    circles[i].y += circles[i].vy
+  }
+
+        ctx.beginPath();
+        ctx.arc(200, x, 20, 0, 2 * Math.PI);
+        ctx.closePath();
+        ctx.fillStyle = "blue";
+        ctx.fill()
+
+        
+        // call function
+    
+        window.requestAnimationFrame(draw)
+        
+      }
+
+      draw()
+        
+
+
+
+
+      
+      
+    </script>
+
+  </body>
+</html>

@@ -1,0 +1,68 @@
+
+ <!DOCTYPE html>
+<html>
+    <head>
+      <link rel="stylesheet" href="style.css">
+      <title>Simple Map</title>
+      <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+      <!-- jsFiddle will insert css and js -->
+    </head>
+    <body>
+    
+      <div id="map"></div>
+  
+      <!-- Async script executes immediately and must be after any DOM elements used in callback. -->
+      <script
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAghQeevdSC0eg4Y9oHJkGa5pgFaSJ4Xeo&callback=initMap&v=weekly&channel=2"
+        async
+  
+      ></script>
+      <script>
+        let map;
+
+    
+  function sucess(position) {
+    let {
+            latitude,
+            longitude
+        } = position.coords;
+        let  myD =  { lat: latitude, lon: longitude };
+
+        return myD;
+  }
+
+
+
+  function initMap() {
+    
+
+   let d =  navigator.geolocation.getCurrentPosition(sucess);
+
+    map = new google.maps.Map(document.getElementById("map"), {
+      center: d,
+      zoom: 15,
+    });
+    marker = new google.maps.Marker({
+      position: d,
+      draggable: true,
+      animation: google.maps.Animation.DROP,
+      map,
+      title: "Hello World!"
+      
+    });
+    
+    marker.addListener("click", toggleBounce);
+  }
+        function toggleBounce() {
+    if (marker.getAnimation() !== null) {
+      marker.setAnimation(null);
+    } else {
+      marker.setAnimation(google.maps.Animation.BOUNCE);
+    }
+  }
+ 
+
+  </script>
+  
+    </body>
+  </html>
