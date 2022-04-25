@@ -1,0 +1,101 @@
+
+<html>
+    <head>
+      <link rel="stylesheet" href="style.css">
+      <title>Simple Map</title>
+      <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+      <!-- jsFiddle will insert css and js -->
+    </head>
+    <body>
+    
+      <div id="map"></div>
+  
+      <!-- Async script executes immediately and must be after any DOM elements used in callback. -->
+      <script
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAghQeevdSC0eg4Y9oHJkGa5pgFaSJ4Xeo&callback=initMap&v=weekly&channel=2"
+        async
+  
+      ></script>
+      <script> 
+        let map1;
+  
+  
+  
+  
+  
+        
+      </script>
+      <script>
+        let map;
+  
+  function initMap() {
+   const myD =  { lat: 41.8696, lng: -87.6496 }
+    map = new google.maps.Map(document.getElementById("map"), {
+      center: myD,
+      zoom: 15,
+    });
+    marker = new google.maps.Marker({
+      position: myD,
+      draggable: true,
+      animation: google.maps.Animation.DROP,
+      map,
+      title: "Hello World!"
+  })
+  
+  let url = "https://data.cityofchicago.org/resource/4ijn-s7e5.json?zip=60607&$LIMIT=100";
+
+
+
+        fetch(url).then ( (response) => {
+    return response.json();
+  }).then ( (json) => {
+      console.log(json);
+    let object = json;
+    for(var i =0; i<object.length; i++) {
+    const myJSON = JSON.stringify(json[i]["dba_name"]);
+    console.log(myJSON);
+         // let stringo = ;
+   let contentString = myJSON ;
+          
+           const infowindow = new google.maps.InfoWindow({
+       content: contentString,
+     });
+  
+          let range = {lat: parseFloat(json[i]["latitude"]), lng: parseFloat(json[i]["longitude"])}
+          
+          
+     marker = new google.maps.Marker({
+      position: range,
+      draggable: false,
+      animation: google.maps.Animation.DROP,
+      map,
+      title: "Hello World!"
+      
+    });
+           marker.addListener("click", () => {
+      infowindow.open({
+        anchor: marker,
+        map,
+        shouldFocus: false,
+      });
+   });
+    }
+  })
+      
+
+  
+}
+  
+
+
+  
+
+
+    
+
+       
+  //const obj = JSON.parse(inspection_data);
+  
+  </script>
+    </body>
+  </html>
