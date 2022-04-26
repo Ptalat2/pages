@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width">
+        <title>repl.it</title>
+
+    </head>
+
+    <body>
+        <h1>Form Basics</h1>
+
+        <p id="uptonSinclairQuote">
+            It is difficult to get a man to understand something, when his salary depends upon his not understanding it! -- Upton Sinclair"
+                </p>
+
+        <form id = "from1"> 
+            <input type="text" id = "text1">
+            <br>
+            <input type="radio" id="r" name="radio1" value="red">
+             <label for="r">red</label><br> 
+             <input type="radio" id="g" name="radio1" value="green">
+             <label for="g">green</label><br>
+             <input type="radio" id="b" name="radio1" value="blue">
+             <label for="b">blue</label><br>
+             <input type="radio" id="W" name="radio1" value="White">
+             <label for="W">white</label><br>
+
+             <select id="select1">
+                 <option>Mon</option>
+                 <option>Wed</option>
+                 <option>Fri</option>
+             </select>
+
+            <textarea name="textArea1" rows="10" cols="30" id = "Text"  placeholder="Please provide any additional feedback
+            "></textarea>
+        </form>
+
+        <script>
+            let v = document.querySelector("#text1");
+            v.value = "Preet Talati";
+
+            document.querySelector("#g")
+          .addEventListener ( "click", (evt) => {
+              document.querySelector("body").style.backgroundColor = 'green';
+             
+          });
+
+          document.querySelector("#b")
+          .addEventListener ( "click", (evt) => {
+            document.querySelector("body").style.backgroundColor = 'blue';
+             
+          });
+
+          document.querySelector("#r")
+          .addEventListener ( "click", (evt) => {
+            document.querySelector("body").style.backgroundColor = 'red';
+          });
+
+          document.querySelector("#W")
+          .addEventListener ( "click", (evt) => {
+            document.querySelector("body").style.backgroundColor = 'white';
+          });
+
+          let p = document.querySelector("#uptonSinclairQuote").innerText;
+
+          document.querySelector("#Text").value = p;
+
+          document.querySelector("#select1")
+          .addEventListener ( "change", (evt) => {
+              console.log(evt.target.value);
+          });
+
+
+        </script>
+
+    </body>
+</html>
